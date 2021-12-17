@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
-import org.hibernate.ResourceClosedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -62,7 +61,7 @@ public class ClientService {
 		try {
 			repository.deleteById(id);
 		}catch(EmptyResultDataAccessException e) {
-			throw new ResourceClosedException("Id not Found"+id);
+			throw new ResourceNotFoundException("Id not Found"+id);
 		}catch(DataIntegrityViolationException e) {
 			throw new DatabaseException("integrity violation");
 		}
